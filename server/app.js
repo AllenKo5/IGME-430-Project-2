@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.engine('handlebars', expressHandlebars.engine({ defaultLayout: '' }));
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
+app.use(cookieParser());
 
 router(app);
 

@@ -7,6 +7,10 @@ const makerPage = (req, res) => {
   return res.render('app');
 };
 
+const domoPage = (req, res) => {
+  return res.render('domos');
+}
+
 const makeDomo = async (req, res) => {
   if (!req.body.name || !req.body.age) {
     return res.status(400).json({ error: 'Both name and age are required!' });
@@ -15,13 +19,14 @@ const makeDomo = async (req, res) => {
   const domoData = {
     name: req.body.name,
     age: req.body.age,
+    food: req.body.food,
     owner: req.session.account._id,
   };
 
   try {
     const newDomo = new Domo(domoData);
     await newDomo.save();
-    return res.status(201).json({ name: newDomo.name, age: newDomo.age });
+    return res.status(201).json({ name: newDomo.name, food: newDomo.food, age: newDomo.age });
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -38,11 +43,23 @@ const getDomos = (req, res) => {
       return res.status(400).json({ error: 'An error occurred!' });
     }
     return res.json({ domos: docs });
-  })
+  });
+};
+
+const getAllDomos = (req, res) => {
+  return DomoModel.findAllDomos((err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred!' });
+    }
+    return res.json({ domos: docs });
+  });
 }
 
 module.exports = {
   makerPage,
+  domoPage,
   makeDomo,
   getDomos,
+  getAllDomos,
 };

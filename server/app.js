@@ -12,26 +12,23 @@ const RedisStore = require('connect-redis')(session);
 const redis = require('redis');
 const csrf = require('csurf');
 
-const router = require('./router.js');
+const config = require('./config.js');
 
-const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/DomoMaker';
-mongoose.connect(dbURI, (err) => {
+mongoose.connect(config.connections.mongo, (err) => {
   if (err) {
     console.log('Could not connect to database');
     throw err;
   }
 });
 
-const redisURL = process.env.REDISCLOUD_URL
-  || 'redis://default:OSmpUEUSQJgDV7u092up3YI3x0LM3JIQ@redis-10538.c84.us-east-1-2.ec2.cloud.redislabs.com:10538';
-
 const redisClient = redis.createClient({
   legacyMode: true,
-  url: redisURL,
+  url: config.connections.redis,
 });
 redisClient.connect().catch(console.error);
+
+const router = require('./router.js');
 
 const app = express();
 
@@ -50,7 +47,7 @@ app.use(session({
   store: new RedisStore({
     client: redisClient,
   }),
-  secret: 'Domo Arigato',
+  secret: config.secret,
   resave: true,
   saveUninitialized: true,
   cookie: {
@@ -73,7 +70,7 @@ app.use((err, req, res, next) => {
 
 router(app);
 
-app.listen(port, (err) => {
+app.listen(config.connections.http.port, (err) => {
   if (err) { throw err; }
-  console.log(`Listening on port ${port}`);
+  console.log(`Listening on port ${config.connections.http.port}`);
 });

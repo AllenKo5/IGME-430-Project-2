@@ -51,7 +51,7 @@ nav:nth-child(1) {
     background-color: #66bdff;
 }
 
-.domoForm {
+.msgForm {
     border: 2px solid #338acc;
     height: 35px;
     width: 1000px;
@@ -62,7 +62,7 @@ nav:nth-child(1) {
     border-top-right-radius: 4px;
 }
 
-.domoForm label {
+.msgForm label {
     display: inline-block;
     width: 75px;
     margin-left: 10px;
@@ -71,11 +71,11 @@ nav:nth-child(1) {
     color: white;
 }
 
-.domoForm input[type=text] {
+.msgForm input[type=text] {
     float:left;
 }
 
-.makeDomoSubmit {
+.submitMessage {
     transition: background-color 0.4s ease;
     display: inline;
     width: 90px;
@@ -85,11 +85,11 @@ nav:nth-child(1) {
     text-decoration: none;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
+.submitMessage:link, .submitMessage:visited, .submitMessage:hover, .submitMessage:active {
     color: white;
 }
 
-.makeDomoSubmit:hover {
+.submitMessage:hover {
     transition: background-color 0.4s ease;
     background-color: #338acc;
 }
@@ -196,8 +196,8 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
-    width: 40%;
+#messages {
+    width: 60%;
     min-width: 400px;
     border: 2px solid #55acee;
     border-radius: 4px;
@@ -205,7 +205,7 @@ nav:nth-child(1) {
     margin-top: 100px;
 }
 
-.domo {
+.message {
     width: 95%;
     margin: 0 auto;
     margin-top: 2px;
@@ -218,7 +218,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-.domo:hover {
+.message:hover {
     transition: border-color 0.2s ease-out;
     border-color: rgba(255,255,255, 0.8);
     transition: background-color 2.6s ease-out;
@@ -243,7 +243,7 @@ h3.emptyDomo {
     margin-top: 18px;
 }
 
-h3.domoName {
+h3.msgAuthor {
     float:left;
     width: 200px;
     font-weight: bold;
@@ -251,7 +251,7 @@ h3.domoName {
     font-size: 1.5em;
 }
 
-h3.domoAge {
+h3.msgMessage {
     float:right;
     text-align: left;
     width: 100px;

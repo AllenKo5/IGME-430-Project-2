@@ -4,7 +4,7 @@ const handleMessage = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const msg = e.target.querySelector('#msgMessage').value;
+    const msg = e.target.querySelector('#msgContent').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if (!msg) {
@@ -27,7 +27,7 @@ const MessageForm = (props) => {
             className="msgForm"
         >
             <label htmlFor="message">Message: </label>
-            <input id="msgMessage" type="text" name="message" placeholder="Message" />
+            <input id="msgContent" type="text" name="message" placeholder="Message" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="submitMessage" type="submit" value="Post" />
         </form>
@@ -38,19 +38,20 @@ const MessageList = (props) => {
     if (props.messages.length === 0) {
         return (
             <div className="msgList">
-                <h3 className="emptyMsg">No Messages Yet!</h3>
+                <h3 className="emptyMessage">No Messages Yet!</h3>
             </div>
         );
     }
 
-    const messageNodes = props.messages.map(msg => {
+    const messageNodes = props.messages.map(message => {
         return (
-            <div key={msg._id} className="message">
-                <h3 className="msgAuthor">Author: {msg.author}</h3>
-                <h3 className="msgMessage">{msg.msg}</h3>
+            <div key={message._id} className="message">
+                <h3 className="msgAuthor">Author: {message.author}</h3>
+                <p className="msgContent">{message.msg}</p>
+                <p className="msgDate"><i>Posted: {message.createdDate}</i></p>
             </div>
         );
-    });
+    }).reverse();
 
     return (
         <div className="msgList">

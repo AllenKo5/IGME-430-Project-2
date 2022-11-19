@@ -1,23 +1,23 @@
 require('dotenv').config();
 
 const connections = {
-    development: {
-        http: {
-            port: 3000,
-        },
-        mongo: 'mongodb://localhost/IGMEProject2',
-        redis: process.env.REDISCLOUD_URL,
+  development: {
+    http: {
+      port: 3000,
     },
-    production: {
-        http: {
-            port: process.env.PORT || process.env.NODE_PORT || 3000,
-        },
-        mongo: process.env.MONGODB_URI || 'mongodb://localhost/IGMEProject2',
-        redis: process.env.REDISCLOUD_URL,
+    mongo: 'mongodb://localhost/IGMEProject2',
+    redis: process.env.REDISCLOUD_URL,
+  },
+  production: {
+    http: {
+      port: process.env.PORT || process.env.NODE_PORT || 3000,
     },
+    mongo: process.env.MONGODB_URI || 'mongodb://localhost/IGMEProject2',
+    redis: process.env.REDISCLOUD_URL,
+  },
 };
 
 module.exports = {
-    connections: connections[process.env.NODE_ENV],
-    secret: process.env.SECRET,
+  connections: connections[process.env.NODE_ENV],
+  secret: process.env.SECRET,
 };

@@ -14,7 +14,6 @@ const csrf = require('csurf');
 
 const config = require('./config.js');
 
-
 mongoose.connect(config.connections.mongo, (err) => {
   if (err) {
     console.log('Could not connect to database');

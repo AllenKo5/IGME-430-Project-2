@@ -73,13 +73,16 @@ const signup = async (req, res) => {
   }
 };
 
-const getAccountData = (req, res) => AccountModel.getAccountData(req.session.account._id, (err, docs) => {
-  if (err) {
-    console.log(err);
-    return res.status(400).json({ error: 'An error occurred.' });
-  }
-  return res.json({ account: docs });
-});
+const getAccountData = (req, res) => AccountModel.getAccountData(
+  req.session.account._id,
+  (err, docs) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({ error: 'An error occurred.' });
+    }
+    return res.json({ account: docs });
+  },
+);
 
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });

@@ -1,28 +1,29 @@
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <title>DomoMaker</title>
+  <meta charset="utf-8" />
+  <title>Chirp</title>
   <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-  <link rel="shortcut icon" href="/assets/img/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+  <link rel="shortcut icon" href="/assets/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/assets/style2.css" />
 </head>
-<body> 
-  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+
+<body>
+  <nav><a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo" /></a>
     <div class="navlink"><a id="loginButton" href="/login">Login</a></div>
     <div class="navlink"><a id="signupButton" href="/signup">Sign up</a></div>
-    <div class="navlink"><a id="domoPage" href="/domos">All Domos</a></div>
   </nav>
-  
+
+  <div id="error" class='hidden'>
+    <h3><span id="errorMessage"></span></h3>
+  </div>
+
   <section id="content">
 
   </section>
 
-  <div id="domoMessage" class='hidden'>
-    <img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3>
-    <img id="domo" src="assets/img/domo.png" alt="domo"/>
-  </div>
   <script src="/assets/loginBundle.js"></script>
 </body>
+
 </html>

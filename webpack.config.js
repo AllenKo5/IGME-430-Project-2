@@ -4,7 +4,6 @@ module.exports = {
     entry: {
         app: './client/message.jsx',
         login: './client/login.jsx',
-        domos: './client/domos.jsx',
     },
     module: {
         rules: [

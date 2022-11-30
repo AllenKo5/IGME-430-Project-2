@@ -12,7 +12,7 @@ const connections = {
     http: {
       port: process.env.PORT || process.env.NODE_PORT || 3000,
     },
-    mongo: process.env.MONGODB_URI || 'mongodb://localhost/IGMEProject2',
+    mongo: process.env.MONGODB_URI || 'mongodb+srv://ask9458Heroku:jLzi2RYJl1f9adxZ@cluster0.piszaai.mongodb.net/?retryWrites=true&w=majority',
     redis: process.env.REDISCLOUD_URL,
   },
 };

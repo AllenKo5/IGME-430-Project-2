@@ -1,0 +1,147 @@
+/*main page css*/
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    user-select: none;
+}
+
+#logo {
+    height: 40px;
+    width: 40;
+    padding: 5px;
+    float: left;
+    border-radius: 8px;
+}
+
+nav {
+    width: 100%;
+    background-color: mediumorchid;
+    display: flex;
+    align-items: center;
+}
+
+.navlink {
+    padding: 5px;
+    padding-left: 15px;
+    color: white;
+    font-size: 1.3em;
+    float: left;
+}
+
+.navlink a,
+.navlink a:link,
+.navlink a:visited,
+.navlink a:hover,
+.navlink a:active {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: mediumorchid;
+    transition: background-color 0.4s ease;
+}
+
+.navlink a:hover {
+    transition: background-color 0.8s ease;
+    background-color: darkorchid;
+}
+
+#header {
+    width: 100%;
+}
+
+#header h1 {
+    text-align: center;
+    font-size: 3em;
+    color: darkorchid;
+}
+
+#header p {
+    text-align: center;
+    color: darkorchid;
+}
+
+.hidden {
+    display: none;
+}
+
+#error {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 20px;
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: thistle;
+    text-align: center;
+}
+
+
+/*login.jsx css*/
+.mainForm {
+    width: 400px;
+    margin: 0 auto;
+    font-size: 1.2em;
+}
+
+.mainForm h3 {
+    text-align: center;
+}
+
+.mainForm label {
+    display: inline-block;
+    width: 140px;
+    margin-right: 10px;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+.formSubmit {
+    transition: background-color 0.4s ease;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    background-color: mediumorchid;
+    border-radius: 20px;
+    border-color: darkorchid;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+}
+
+.formSubmit:link,
+.formSubmit:visited,
+.formSubmit:hover,
+.formSubmit:active {
+    color: white;
+}
+
+.formSubmit:hover {
+    transition: background-color 0.4s ease;
+    background-color: darkorchid;
+}
+
+#user,
+#pass,
+#pass2 {
+    text-align: center;
+    margin: 2px auto;
+    font-size: 1.2em;
+    width: 250px;
+    border-radius: 6px;
+}
+
+#user:focus,
+#pass:focus,
+#pass2:focus {
+    outline: none;
+    box-shadow: 0px 0px 1px 1px mediumorchid;
+}

@@ -6,6 +6,7 @@ const { Message } = models;
 // renders message page
 const messagePage = (req, res) => res.render('app');
 
+// creates a new message
 const makeMessage = async (req, res) => {
   // if message is empty
   if (!req.body.msg) {

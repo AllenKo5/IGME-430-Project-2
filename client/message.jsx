@@ -49,17 +49,6 @@ const MessageList = (props) => {
 
     // displays all messages in reverse chronological order
     const messageNodes = props.messages.map(message => {
-        // adds edit button if account owner
-        if (message.owner === props.account) {
-            return (
-                <div key={message._id} className="message">
-                    <h3 className="msgAuthor">{message.author}</h3>
-                    <p className="msgContent">{message.msg}</p>
-                    <p className="msgDate">Posted: {message.createdDate}</p>
-                    <button>Edit</button>
-                </div>
-            );
-        }
         return (
             <div key={message._id} className="message">
                 <h3 className="msgAuthor">{message.author}</h3>
@@ -81,11 +70,8 @@ const loadMessagesFromServer = async () => {
     const msgResponse = await fetch('/getMessages');
     const msgData = await msgResponse.json();
 
-    const account = await fetch('/getAccountData');
-    const accountData = await account.json();
-    
     ReactDOM.render(
-        <MessageList account={accountData.account[0]._id} messages={msgData.messages} />,
+        <MessageList messages={msgData.messages} />,
         document.getElementById('messages')
     );
 };

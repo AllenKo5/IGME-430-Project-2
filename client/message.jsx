@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 
+// submits message data
 const handleMessage = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -17,6 +18,7 @@ const handleMessage = (e) => {
     return false;
 };
 
+// message form component
 const MessageForm = (props) => {
     return (
         <form id="msgForm"
@@ -26,15 +28,17 @@ const MessageForm = (props) => {
             method="POST"
             className="msgForm"
         >
-            <label htmlFor="message">Message: </label>
+            <label htmlFor="message">What's on your mind? </label><br />
             <input id="msgContent" type="text" name="message" placeholder="Message" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="submitMessage" type="submit" value="Post" />
+            <input className="submitMessage" type="submit" value="Chirp" />
         </form>
     );
 };
 
+// message list component
 const MessageList = (props) => {
+    // if there are no messages
     if (props.messages.length === 0) {
         return (
             <div className="msgList">
@@ -43,12 +47,13 @@ const MessageList = (props) => {
         );
     }
 
+    // displays all messages in reverse chronological order
     const messageNodes = props.messages.map(message => {
         return (
             <div key={message._id} className="message">
-                <h3 className="msgAuthor">Author: {message.author}</h3>
+                <h3 className="msgAuthor">{message.author}</h3>
                 <p className="msgContent">{message.msg}</p>
-                <p className="msgDate"><i>Posted: {message.createdDate}</i></p>
+                <p className="msgDate">Posted: {message.createdDate}</p>
             </div>
         );
     }).reverse();
@@ -60,6 +65,7 @@ const MessageList = (props) => {
     );
 };
 
+// fetches all messages stored in database
 const loadMessagesFromServer = async () => {
     const response = await fetch('/getMessages');
     const data = await response.json();
@@ -69,6 +75,7 @@ const loadMessagesFromServer = async () => {
     );
 };
 
+// init function
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();

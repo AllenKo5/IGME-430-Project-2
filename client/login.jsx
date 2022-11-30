@@ -1,5 +1,6 @@
 const helper = require('./helper.js');
 
+// submits login data
 const handleLogin = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -18,6 +19,7 @@ const handleLogin = (e) => {
     return false;
 };
 
+// submits signup data
 const handleSignup = (e) => {
     e.preventDefault();
     helper.hideError();
@@ -42,6 +44,7 @@ const handleSignup = (e) => {
     return false;
 };
 
+// login window component
 const LoginWindow = (props) => {
     return (
         <form id="loginForm"
@@ -61,6 +64,7 @@ const LoginWindow = (props) => {
     );
 };
 
+// signup window component
 const SignupWindow = (props) => {
     return (
         <form id="signupForm"
@@ -82,6 +86,7 @@ const SignupWindow = (props) => {
     );
 };
 
+// init function
 const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();

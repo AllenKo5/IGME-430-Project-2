@@ -1,104 +1,102 @@
-html, body {
+/*main page css*/
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
-
-h1 {
-    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    user-select: none;
 }
 
 #logo {
     height: 40px;
     width: 40;
-    padding-top: 5px;
-    float:left;
+    padding: 5px;
+    float: left;
     border-radius: 8px;
 }
 
 nav {
     width: 100%;
-    height: 50px;
-    background-color: #55acee;
-}
-
-nav:nth-child(1) {
-    padding-left: 25px;
+    background-color: mediumorchid;
+    display: flex;
+    align-items: center;
 }
 
 .navlink {
     padding: 5px;
-    padding-top: 12px;
-    padding-left: 20px;
+    padding-left: 15px;
     color: white;
     font-size: 1.3em;
     float: left;
 }
 
-.navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
+.navlink a,
+.navlink a:link,
+.navlink a:visited,
+.navlink a:hover,
+.navlink a:active {
     color: white;
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: mediumorchid;
     transition: background-color 0.4s ease;
 }
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
+    background-color: darkorchid;
 }
 
-.msgForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 1000px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
+#header {
+    width: 100%;
 }
 
-.msgForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    float: left;
-    color: white;
+#header h1 {
+    text-align: center;
+    font-size: 3em;
+    color: darkorchid;
 }
 
-.msgForm input[type=text] {
-    float:left;
+#header p {
+    text-align: center;
+    color: darkorchid;
 }
 
-.submitMessage {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
+.hidden {
+    display: none;
 }
 
-.submitMessage:link, .submitMessage:visited, .submitMessage:hover, .submitMessage:active {
-    color: white;
+#error {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 20px;
+    padding: 5px 25px;
+    border-radius: 25px;
+    background-color: thistle;
+    text-align: center;
 }
 
-.submitMessage:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
-}
-
-.mainForm {
-    height: 300px;
-    width: 350px;
+#ad {
+    width: 80%;
+    height: 100px;
     margin: 0 auto;
-    padding-top: 350px;
+    margin-top: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 3em;
+    text-align: center;
+}
+
+
+/*login.jsx css*/
+.mainForm {
+    width: 400px;
+    margin: 0 auto;
     font-size: 1.2em;
 }
 
@@ -108,7 +106,7 @@ nav:nth-child(1) {
 
 .mainForm label {
     display: inline-block;
-    width: 100px;
+    width: 140px;
     margin-right: 10px;
     text-align: right;
     font-size: 1.2em;
@@ -119,151 +117,123 @@ nav:nth-child(1) {
     display: block;
     text-align: center;
     margin: 0 auto;
-    margin-top: 14px;
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    background-color: mediumorchid;
+    border-radius: 20px;
+    border-color: darkorchid;
     font-size: 1.2em;
-    width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
-    padding: 3px 0px;
     color: white;
     text-decoration: none;
 }
 
-.formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
+.formSubmit:link,
+.formSubmit:visited,
+.formSubmit:hover,
+.formSubmit:active {
     color: white;
 }
 
 .formSubmit:hover {
     transition: background-color 0.4s ease;
-    background-color: #338acc;
+    background-color: darkorchid;
 }
 
-#user, #pass, #pass2 {
+#user,
+#pass,
+#pass2 {
     text-align: center;
-    font-size: 1.1em;
-    width: 180px;
+    margin: 2px auto;
+    font-size: 1.2em;
+    width: 250px;
     border-radius: 6px;
 }
 
-#user:focus, #pass:focus, #pass2:focus {
+#user:focus,
+#pass:focus,
+#pass2:focus {
     outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
+    box-shadow: 0px 0px 1px 1px mediumorchid;
 }
 
-.hidden {
-    display: none;
-}
 
-#domoMessage {
-    top: 250px;
-    width: 250px;
-    height: 650px;
-    position: absolute;
-    z-index: 200;
-    right: 0px;
-    overflow: hidden;
-}
-
-#domoMessage h3 {
-    width: 200px;
-    position: absolute;
-    top: 0px;
-    left: 20px;
-}
-
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
-}
-
-#errorMessage {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: red;
-    font-style: italic;
-}
-
-#domo {
-    z-index: 225;
-    margin-top: -20px;
-    margin-left: 135px;
-    height: 450px;
-    width: 300px;
-    -ms-transform: rotate(330deg);
-    -webkit-transform: rotate(330deg); 
-    transform: rotate(330deg);
-}
-
+/*message.jsx css*/
+#makeMessage,
 #messages {
-    width: 60%;
-    min-width: 400px;
-    border: 2px solid #55acee;
+    width: 80%;
+    border: 2px solid mediumorchid;
     border-radius: 4px;
+    padding: 10px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 20px;
+    background-color: plum;
+}
+
+.msgForm {
+    width: 80%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: thistle;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.submitMessage {
+    transition: background-color 0.4s ease;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 150px;
+    height: 40px;
+    background-color: mediumorchid;
+    border-radius: 20px;
+    border-color: darkorchid;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+}
+
+#msgContent {
+    text-align: center;
+    margin: 2px auto;
+    font-size: 1.2em;
+    width: 400px;
+    height: 100px;
+    border-radius: 6px;
+}
+
+.msgList {
+    margin: 0 auto;
+    padding: 10px;
+    background-color: plum;
 }
 
 .message {
     width: 95%;
-    margin: 0 auto;
-    margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #55acee;
+    margin: 5px auto;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: thistle;
     padding: 10px;
-    min-height:60px;
     overflow: hidden;
 }
 
-.message:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
-
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyDomo {
-    width: 400px;
+.msgAuthor {
+    width: 95%;
+    margin: 10px auto;
     font-size: 1.5em;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 18px;
-}
-
-h3.msgAuthor {
-    float:left;
-    width: 200px;
     font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
 }
 
-h3.msgMessage {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
+.msgContent {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 1.2em;
 }
 
-.domo:first-child {
-    margin-top: 10px;
-}
-
-.domo:last-child {
-    margin-bottom:10px;
+.msgDate {
+    font-size: 0.6em;
+    font-style: italic;
+    float: right;
 }

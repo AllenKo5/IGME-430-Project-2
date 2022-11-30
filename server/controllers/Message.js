@@ -3,9 +3,11 @@ const MessageModel = require('../models/Message');
 
 const { Message } = models;
 
-const makerPage = (req, res) => res.render('app');
+// renders message page
+const messagePage = (req, res) => res.render('app');
 
 const makeMessage = async (req, res) => {
+  // if message is empty
   if (!req.body.msg) {
     return res.status(400).json({ error: 'Message is required!' });
   }
@@ -16,6 +18,7 @@ const makeMessage = async (req, res) => {
     owner: req.session.account._id,
   };
 
+  // attempts to save the message into the database
   try {
     const newMessage = new Message(msgData);
     await newMessage.save();
@@ -28,6 +31,7 @@ const makeMessage = async (req, res) => {
   }
 };
 
+// returns all messages in database
 const getMessages = (req, res) => MessageModel.getAllMessages((err, docs) => {
   if (err) {
     console.log(err);
@@ -37,7 +41,7 @@ const getMessages = (req, res) => MessageModel.getAllMessages((err, docs) => {
 });
 
 module.exports = {
-  makerPage,
+  messagePage,
   makeMessage,
   getMessages,
 };

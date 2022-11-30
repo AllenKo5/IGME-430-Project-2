@@ -72,6 +72,8 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
+AccountSchema.statics.getAccountData = (ownerId, callback) => AccountModel.find({ _id: ownerId }).select('username').lean().exec(callback);
+
 AccountModel = mongoose.model('Account', AccountSchema);
 
 module.exports = AccountModel;

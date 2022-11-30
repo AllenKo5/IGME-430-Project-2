@@ -1,4 +1,5 @@
 const models = require('../models');
+const AccountModel = require('../models/Account.js');
 
 const { Account } = models;
 
@@ -72,6 +73,14 @@ const signup = async (req, res) => {
   }
 };
 
+const getAccountData = (req, res) => AccountModel.getAccountData(req.session.account._id, (err, docs) => {
+  if (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred.' });
+  }
+  return res.json({ account: docs });
+});
+
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
 
@@ -82,4 +91,5 @@ module.exports = {
   login,
   signup,
   getToken,
+  getAccountData,
 };

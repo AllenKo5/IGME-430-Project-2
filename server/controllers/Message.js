@@ -1,5 +1,5 @@
 const models = require('../models');
-const MessageModel = require('../models/Message');
+const MessageModel = require('../models/Message.js');
 
 const { Message } = models;
 

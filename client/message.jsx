@@ -28,7 +28,7 @@ const MessageForm = (props) => {
             method="POST"
             className="msgForm"
         >
-            <label htmlFor="message">What's on your mind? </label><br />
+            <label htmlFor="message">Welcome, <b>{props.username}</b>! What's on your mind? </label><br />
             <input id="msgContent" type="text" name="message" placeholder="Message" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
             <input className="submitMessage" type="submit" value="Chirp" />
@@ -49,6 +49,17 @@ const MessageList = (props) => {
 
     // displays all messages in reverse chronological order
     const messageNodes = props.messages.map(message => {
+        // adds edit button if account owner
+        if (message.owner === props.account) {
+            return (
+                <div key={message._id} className="message">
+                    <h3 className="msgAuthor">{message.author}</h3>
+                    <p className="msgContent">{message.msg}</p>
+                    <p className="msgDate">Posted: {message.createdDate}</p>
+                    <button>Edit</button>
+                </div>
+            );
+        }
         return (
             <div key={message._id} className="message">
                 <h3 className="msgAuthor">{message.author}</h3>
@@ -67,10 +78,14 @@ const MessageList = (props) => {
 
 // fetches all messages stored in database
 const loadMessagesFromServer = async () => {
-    const response = await fetch('/getMessages');
-    const data = await response.json();
+    const msgResponse = await fetch('/getMessages');
+    const msgData = await msgResponse.json();
+
+    const account = await fetch('/getAccountData');
+    const accountData = await account.json();
+    
     ReactDOM.render(
-        <MessageList messages={data.messages} />,
+        <MessageList account={accountData.account[0]._id} messages={msgData.messages} />,
         document.getElementById('messages')
     );
 };
@@ -80,8 +95,11 @@ const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
 
+    const account = await fetch('/getAccountData');
+    const accountData = await account.json();
+
     ReactDOM.render(
-        <MessageForm csrf={data.csrfToken} />,
+        <MessageForm username={accountData.account[0].username} csrf={data.csrfToken} />,
         document.getElementById('makeMessage')
     );
 

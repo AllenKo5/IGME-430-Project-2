@@ -33,7 +33,7 @@ MessageSchema.statics.toAPI = (doc) => ({
   owner: doc.owner,
 });
 
-MessageSchema.statics.getAllMessages = (callback) => MessageModel.find().select('author msg createdDate').lean().exec(callback);
+MessageSchema.statics.getAllMessages = (callback) => MessageModel.find().select('author msg owner createdDate').lean().exec(callback);
 
 MessageModel = mongoose.model('Message', MessageSchema);
 

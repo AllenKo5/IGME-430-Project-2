@@ -5,11 +5,12 @@ const handlePassword = (e) => {
     e.preventDefault();
     helper.hideError();
 
+    const currentPass = e.target.querySelector('#currentPass').value;
     const newPass = e.target.querySelector('#newPass').value;
     const newPass2 = e.target.querySelector('#newPass2').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
-    helper.sendPost(e.target.action, { newPass, newPass2, _csrf });
+    helper.sendPost(e.target.action, { currentPass, newPass, newPass2, _csrf });
 
     return false;
 };
@@ -24,6 +25,8 @@ const PasswordChange = (props) => {
             method="POST"
             className="passForm"
         >
+            <label htmlFor="currentPass">Current Password</label>
+            <input id="currentPass" type="password" name="currentPass" placeholder="Current Password" />
             <label htmlFor="newPass">New Password</label>
             <input id="newPass" type="password" name="newPass" placeholder="New Password" />
             <label htmlFor="newPass2">Confirm Password</label>

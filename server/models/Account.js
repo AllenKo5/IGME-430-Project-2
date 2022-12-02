@@ -81,10 +81,20 @@ AccountSchema.statics.getAccountData = async (ownerId, callback) => {
   }
 };
 
-AccountSchema.statics.changePassword = async (ownerId, password, callback) => {
+AccountSchema.statics.changePassword = async (ownerId, password, newPassword, callback) => {
   try {
-    const pass = await AccountModel.findOneAndUpdate({ _id: ownerId }, { password }).exec();
-    return callback(null, pass);
+    const doc = await AccountModel.findOne({ _id: ownerId }).exec();
+    if (!doc) {
+      return callback();
+    }
+
+    const match = await bcrypt.compare(password, doc.password);
+    if (match) {
+      const newPass = await bcrypt.hash(newPassword, saltRounds);
+      const pass = await AccountModel.findOneAndUpdate({ _id: ownerId }, { password: newPass }).exec();
+      return callback(null, pass);
+    }
+    return callback();
   } catch (err) {
     return callback(err);
   }

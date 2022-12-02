@@ -87,11 +87,12 @@ const getAccountData = (req, res) => AccountModel.getAccountData(
 
 // changes account password
 const changePassword = async (req, res) => {
+  const currentPass = `${req.body.currentPass}`;
   const newPass = `${req.body.newPass}`;
   const newPass2 = `${req.body.newPass2}`;
 
   // if password fields are empty
-  if (!newPass || !newPass2) {
+  if (!currentPass || !newPass || !newPass2) {
     return res.status(400).json({ error: 'All fields are required!' });
   }
 
@@ -103,7 +104,8 @@ const changePassword = async (req, res) => {
   try {
     AccountModel.changePassword(
       req.session.account._id,
-      await Account.generateHash(newPass),
+      currentPass,
+      newPass,
       (err) => {
         if (err) {
           console.log(err);

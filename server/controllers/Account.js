@@ -100,19 +100,22 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'New passwords do not match!' });
   }
 
-  AccountModel.changePassword(
-    req.session.account._id,
-    await Account.generateHash(newPass),
-    (err) => {
-      if (err) {
-        console.log(err);
-        return res.status(400).json({ error: 'An error occurred.' });
-      }
-      return res.json({ message: 'Password changed!' });
-    },
-  );
-
-  return res.json({ message: 'Password changed!' });
+  try {
+    AccountModel.changePassword(
+      req.session.account._id,
+      await Account.generateHash(newPass),
+      (err) => {
+        if (err) {
+          console.log(err);
+          return res.status(400).json({ error: 'An error occurred.' });
+        }
+        return res.json({ message: 'Password changed!' });
+      },
+    );
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred!' });
+  }
 };
 
 // returns CSRF token

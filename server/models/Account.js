@@ -72,19 +72,19 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
-AccountSchema.statics.getAccountData = (ownerId, callback) => {
+AccountSchema.statics.getAccountData = async (ownerId, callback) => {
   try {
-    AccountModel.findOne({ _id: ownerId }).select('username password').lean().exec(callback);
-    return callback();
+    const doc = await AccountModel.findOne({ _id: ownerId }).select('username password').lean().exec();
+    return callback(null, doc);
   } catch (err) {
     return callback(err);
   }
 };
 
-AccountSchema.statics.changePassword = (ownerId, password, callback) => {
+AccountSchema.statics.changePassword = async (ownerId, password, callback) => {
   try {
-    AccountModel.findOneAndUpdate({ _id: ownerId }, { password }).exec(callback);
-    return callback();
+    const pass = await AccountModel.findOneAndUpdate({ _id: ownerId }, { password }).exec();
+    return callback(null, pass);
   } catch (err) {
     return callback(err);
   }

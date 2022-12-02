@@ -17,6 +17,10 @@ const sendPost = async (url, data, handler) => {
     const result = await response.json();
     document.getElementById('error').classList.add('hidden');
 
+    if (result.message) {
+        handleError(result.message);
+    }
+
     // if there was an error in getting a response
     if (result.error) {
         handleError(result.error);

@@ -75,6 +75,7 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
 AccountSchema.statics.getAccountData = (ownerId, callback) => {
   try {
     AccountModel.findOne({ _id: ownerId }).select('username password').lean().exec(callback);
+    return callback();
   } catch (err) {
     return callback(err);
   }
@@ -83,10 +84,11 @@ AccountSchema.statics.getAccountData = (ownerId, callback) => {
 AccountSchema.statics.changePassword = (ownerId, password, callback) => {
   try {
     AccountModel.findOneAndUpdate({ _id: ownerId }, { password }).exec(callback);
+    return callback();
   } catch (err) {
     return callback(err);
   }
-}
+};
 
 AccountModel = mongoose.model('Account', AccountSchema);
 

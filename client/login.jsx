@@ -110,8 +110,10 @@ const init = async () => {
         return false;
     });
 
-    ReactDOM.render(<LoginWindow csrf={data.csrfToken} />,
-        document.getElementById('content'));
+    ReactDOM.render(
+        <LoginWindow csrf={data.csrfToken} />,
+        document.getElementById('content')
+    );
 };
 
 window.onload = init;

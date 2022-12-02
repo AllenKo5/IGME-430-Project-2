@@ -73,8 +73,8 @@ const signup = async (req, res) => {
   }
 };
 
-const getAccountData = (req, res) => AccountModel.getAccountData(
-  req.session.account._id,
+// gets data from currently logged in account
+const getAccountData = (req, res) => AccountModel.getAccountData(req.session.account._id,
   (err, docs) => {
     if (err) {
       console.log(err);
@@ -83,6 +83,34 @@ const getAccountData = (req, res) => AccountModel.getAccountData(
     return res.json({ account: docs });
   },
 );
+
+// changes account password
+const changePassword = async (req, res) => {
+  const newPass = `${req.body.newPass}`;
+  const newPass2 = `${req.body.newPass2}`;
+
+  // if password fields are empty
+  if (!newPass || !newPass2) {
+    return res.status(400).json({ error: 'All fields are required!' });
+  }
+
+  // if new passwords do not match
+  if (newPass !== newPass2) {
+    return res.status(400).json({ error: 'New passwords do not match!' });
+  }
+
+  AccountModel.changePassword(req.session.account._id,
+    await Account.generateHash(newPass),
+    (err) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: 'An error occurred.' });
+      }
+    }
+  );
+
+  return res.json({ message: 'Password changed!' });
+}
 
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
@@ -95,4 +123,5 @@ module.exports = {
   signup,
   getToken,
   getAccountData,
+  changePassword,
 };

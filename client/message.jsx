@@ -85,7 +85,7 @@ const init = async () => {
     const accountData = await account.json();
 
     ReactDOM.render(
-        <MessageForm username={accountData.account[0].username} csrf={data.csrfToken} />,
+        <MessageForm username={accountData.account.username} csrf={data.csrfToken} />,
         document.getElementById('makeMessage')
     );
 

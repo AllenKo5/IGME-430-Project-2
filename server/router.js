@@ -16,6 +16,8 @@ const router = (app) => {
   app.get('/msg', mid.requiresLogin, controllers.Message.messagePage);
   app.post('/msg', mid.requiresLogin, controllers.Message.makeMessage);
 
+  app.post('/pass', mid.requiresLogin, controllers.Account.changePassword);
+
   app.get('/account', mid.requiresLogin, controllers.Account.accountPage);
 
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);

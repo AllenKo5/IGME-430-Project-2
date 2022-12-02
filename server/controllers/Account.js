@@ -106,10 +106,10 @@ const changePassword = async (req, res) => {
       req.session.account._id,
       currentPass,
       newPass,
-      (err) => {
-        if (err) {
+      (err, pass) => {
+        if (err || !pass) {
           console.log(err);
-          return res.status(400).json({ error: 'An error occurred.' });
+          return res.status(400).json({ error: 'Password does not match your current password!' });
         }
         return res.json({ message: 'Password changed!' });
       },
@@ -119,6 +119,9 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'An error occurred!' });
   }
 };
+
+// changes current premium status
+const changePremium = (req, res) => res.json({ message: 'Premium activated!' });
 
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });
@@ -132,4 +135,5 @@ module.exports = {
   getToken,
   getAccountData,
   changePassword,
+  changePremium,
 };

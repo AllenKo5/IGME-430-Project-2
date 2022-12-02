@@ -15,6 +15,17 @@ const handlePassword = (e) => {
     return false;
 };
 
+const handlePremium = (e) => {
+    e.preventDefault();
+    helper.hideError();
+    
+    const _csrf = e.target.querySelector('#_csrf').value;
+
+    helper.sendPost(e.target.action, { _csrf });
+
+    return false;
+};
+
 // password change component
 const PasswordChange = (props) => {
     return (
@@ -37,6 +48,22 @@ const PasswordChange = (props) => {
     );
 };
 
+// premium option component
+const PremiumButton = (props) => {
+    return (
+        <form id="premiumButton"
+            name="premiumButton"
+            onSubmit={handlePremium}
+            action="/premium"
+            method="POST"
+            className="premiumButton"
+        >
+            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            <input className="submitPremium" type="submit" value="Activate Premium" />
+        </form>
+    );
+};
+
 // init function
 const init = async () => {
     const response = await fetch('/getToken');
@@ -45,6 +72,11 @@ const init = async () => {
     ReactDOM.render(
         <PasswordChange csrf={data.csrfToken} />,
         document.getElementById('changePassword')
+    );
+
+    ReactDOM.render(
+        <PremiumButton csrf={data.csrfToken} />,
+        document.getElementById('premium')
     );
 };
 

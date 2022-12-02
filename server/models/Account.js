@@ -33,6 +33,10 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  premium: {
+    type: Boolean,
+    default: false,
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -72,15 +76,17 @@ AccountSchema.statics.authenticate = async (username, password, callback) => {
   }
 };
 
+// returns account data based on _id of current user
 AccountSchema.statics.getAccountData = async (ownerId, callback) => {
   try {
-    const doc = await AccountModel.findOne({ _id: ownerId }).select('username password').lean().exec();
+    const doc = await AccountModel.findOne({ _id: ownerId }).select('username password premium').lean().exec();
     return callback(null, doc);
   } catch (err) {
     return callback(err);
   }
 };
 
+// compares and changes password
 AccountSchema.statics.changePassword = async (ownerId, password, newPassword, callback) => {
   try {
     const doc = await AccountModel.findOne({ _id: ownerId }).exec();
@@ -91,7 +97,8 @@ AccountSchema.statics.changePassword = async (ownerId, password, newPassword, ca
     const match = await bcrypt.compare(password, doc.password);
     if (match) {
       const newPass = await bcrypt.hash(newPassword, saltRounds);
-      const pass = await AccountModel.findOneAndUpdate({ _id: ownerId }, { password: newPass }).exec();
+      const pass = await AccountModel.findOneAndUpdate({ _id: ownerId }, { password: newPass })
+        .exec();
       return callback(null, pass);
     }
     return callback();

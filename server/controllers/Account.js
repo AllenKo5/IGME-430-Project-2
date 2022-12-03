@@ -5,12 +5,12 @@ const { Account } = models;
 
 // renders login page
 const loginPage = (req, res) => {
-  res.render('login', { csrfToken: req.csrfToken() });
+  res.render('login');
 };
 
 // renders account page
 const accountPage = (req, res) => {
-  res.render('account', { csrfToken: req.csrfToken() });
+  res.render('account');
 };
 
 // ends current session and returns to login page
@@ -26,13 +26,13 @@ const login = (req, res) => {
 
   // if username or password are empty
   if (!username || !pass) {
-    return res.status(400).json({ error: 'All fields are required!' });
+    return res.status(400).json({ popup: 'All fields are required!' });
   }
 
   return Account.authenticate(username, pass, (err, account) => {
     // if username or password is incorrect
     if (err || !account) {
-      return res.status(401).json({ error: 'Wrong username or password!' });
+      return res.status(401).json({ popup: 'Wrong username or password!' });
     }
 
     // otherwise, start a session for user
@@ -49,12 +49,12 @@ const signup = async (req, res) => {
 
   // if username or password are empty
   if (!username || !pass || !pass2) {
-    return res.status(400).json({ error: 'All fields are required!' });
+    return res.status(400).json({ popup: 'All fields are required!' });
   }
 
   // if passwords do not match
   if (pass !== pass2) {
-    return res.status(400).json({ error: 'Passwords do not match!' });
+    return res.status(400).json({ popup: 'Passwords do not match!' });
   }
 
   // hashes password and attempts to save the account into the database
@@ -67,9 +67,9 @@ const signup = async (req, res) => {
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Username already in use!' });
+      return res.status(400).json({ popup: 'Username already in use!' });
     }
-    return res.status(400).json({ error: 'An error occurred!' });
+    return res.status(400).json({ popup: 'An error occurred!' });
   }
 };
 
@@ -79,7 +79,7 @@ const getAccountData = (req, res) => AccountModel.getAccountData(
   (err, docs) => {
     if (err) {
       console.log(err);
-      return res.status(400).json({ error: 'An error occurred.' });
+      return res.status(400).json({ popup: 'An error occurred.' });
     }
     return res.json({ account: docs });
   },
@@ -93,17 +93,17 @@ const changePassword = (req, res) => {
 
   // if password fields are empty
   if (!currentPass || !newPass || !newPass2) {
-    return res.status(400).json({ error: 'All fields are required!' });
+    return res.status(400).json({ popup: 'All fields are required!' });
   }
 
   // if new password is identical
   if (currentPass === newPass || currentPass === newPass2) {
-    return res.status(400).json({ error: 'New password cannot be the same as your old one!' });
+    return res.status(400).json({ popup: 'New password cannot be the same as your old one!' });
   }
 
   // if new passwords do not match
   if (newPass !== newPass2) {
-    return res.status(400).json({ error: 'New passwords do not match!' });
+    return res.status(400).json({ popup: 'New passwords do not match!' });
   }
 
   try {
@@ -114,7 +114,7 @@ const changePassword = (req, res) => {
       (err, pass) => {
         if (err || !pass) {
           console.log(err);
-          return res.status(400).json({ error: 'Password does not match your current password!' });
+          return res.status(400).json({ popup: 'Password does not match your current password!' });
         }
         return res.json({ popup: 'Password changed!' });
       },
@@ -122,7 +122,7 @@ const changePassword = (req, res) => {
     return null;
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ error: 'An error occurred!' });
+    return res.status(400).json({ popup: 'An error occurred!' });
   }
 };
 
@@ -132,7 +132,7 @@ const changePremium = (req, res) => {
     AccountModel.changePremium(req.session.account._id, (err, premium) => {
       if (err) {
         console.log(err);
-        return res.status(400).json({ error: 'An error occurred.' });
+        return res.status(400).json({ popup: 'An error occurred.' });
       }
       if (premium) {
         return res.json({ popup: 'Premium activated!' });
@@ -142,9 +142,9 @@ const changePremium = (req, res) => {
     return null;
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ error: 'An error occurred!' });
+    return res.status(400).json({ popup: 'An error occurred!' });
   }
-}
+};
 
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });

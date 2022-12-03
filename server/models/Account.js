@@ -121,7 +121,7 @@ AccountSchema.statics.changePremium = async (ownerId, callback) => {
   } catch (err) {
     return callback(err);
   }
-}
+};
 
 AccountModel = mongoose.model('Account', AccountSchema);
 

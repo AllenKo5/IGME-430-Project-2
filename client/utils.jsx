@@ -1,6 +1,21 @@
-const helper = require('./helper.js');
+// popup window for errors/updates
+const PopupWindow = (props) => {
+    return (
+        <div id="popupWindow" className='hidden'>
+            <h3><span id="popupMessage"></span></h3>
+        </div>
+    );
+};
 
+// ad window that appears based on premium status
 const AdWindow = (props) => {
+    if (props.premium) {
+        return (
+            <div id="ad" className="hidden">
+                ADS GO HERE
+            </div>
+        );
+    }
     return (
         <div id="ad">
             ADS GO HERE
@@ -8,7 +23,21 @@ const AdWindow = (props) => {
     );
 };
 
-const init = async () => {
+// init function for login page
+const loginInit = () => {
+    ReactDOM.render(
+        <PopupWindow />,
+        document.getElementById('popup')
+    );
+
+    ReactDOM.render(
+        <AdWindow premium={false} />,
+        document.getElementById('ads')
+    );
+}
+
+// init function for other pages
+const accountInit = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
 
@@ -16,11 +45,24 @@ const init = async () => {
     const accountData = await account.json();
 
     ReactDOM.render(
-        <AdWindow premium={accountData.account.premium} csrf={data.csrfToken} />,
-        document.getElementById('ads')
+        <PopupWindow />,
+        document.getElementById('popup')
     );
+
+    if (accountData) {
+        ReactDOM.render(
+            <AdWindow premium={accountData.account.premium} csrf={data.csrfToken} />,
+            document.getElementById('ads')
+        );
+    } else {
+        ReactDOM.render(
+            <AdWindow premium={false} csrf={data.csrfToken} />,
+            document.getElementById('ads')
+        );
+    }
 };
 
 module.exports = {
-    init,
+    loginInit,
+    accountInit,
 }

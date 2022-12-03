@@ -10,7 +10,7 @@ const messagePage = (req, res) => res.render('app');
 const makeMessage = async (req, res) => {
   // if message is empty
   if (!req.body.msg) {
-    return res.status(400).json({ error: 'Message is required!' });
+    return res.status(400).json({ popup: 'Message is required!' });
   }
 
   const msgData = {
@@ -26,9 +26,9 @@ const makeMessage = async (req, res) => {
     return res.status(201).json({ message: newMessage.msg, author: newMessage.author, popup: 'Message posted!' });
   } catch (err) {
     if (err.code === 11000) {
-      return res.status(400).json({ error: 'Message already exists!' });
+      return res.status(400).json({ popup: 'Message already exists!' });
     }
-    return res.status(400).json({ error: 'An error occurred.' });
+    return res.status(400).json({ popup: 'An error occurred.' });
   }
 };
 
@@ -36,7 +36,7 @@ const makeMessage = async (req, res) => {
 const getMessages = (req, res) => MessageModel.getAllMessages((err, docs) => {
   if (err) {
     console.log(err);
-    return res.status(400).json({ error: 'An error occurred.' });
+    return res.status(400).json({ popup: 'An error occurred.' });
   }
   return res.json({ messages: docs });
 });

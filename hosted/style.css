@@ -69,14 +69,15 @@ nav {
     display: none;
 }
 
-#error {
+#popupWindow {
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
     bottom: 20px;
     padding: 5px 25px;
-    border-radius: 25px;
+    border-radius: 50px;
     background-color: thistle;
+    border: 2px solid mediumorchid;
     text-align: center;
 }
 

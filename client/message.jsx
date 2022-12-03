@@ -1,15 +1,16 @@
 const helper = require('./helper.js');
+const utils = require('./utils.jsx');
 
 // submits message data
 const handleMessage = (e) => {
     e.preventDefault();
-    helper.hideError();
+    helper.hidePopup();
 
     const msg = e.target.querySelector('#msgContent').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if (!msg) {
-        helper.handleError('Message is required!');
+        helper.handlePopup('Message is required!');
         return false;
     }
 
@@ -78,6 +79,8 @@ const loadMessagesFromServer = async () => {
 
 // init function
 const init = async () => {
+    utils.accountInit();
+
     const response = await fetch('/getToken');
     const data = await response.json();
 

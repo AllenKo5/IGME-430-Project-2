@@ -1,7 +1,7 @@
-// displays error message
-const handleError = (message) => {
-    document.getElementById('errorMessage').textContent = message;
-    document.getElementById('error').classList.remove('hidden');
+// displays popup message
+const handlePopup = (message) => {
+    document.getElementById('popupMessage').textContent = message;
+    document.getElementById('popupWindow').classList.remove('hidden');
 };
 
 // fetches data from url and handles it appropriately
@@ -15,15 +15,11 @@ const sendPost = async (url, data, handler) => {
     });
 
     const result = await response.json();
-    document.getElementById('error').classList.add('hidden');
+    hidePopup();
 
+    // the the response has a popup
     if (result.popup) {
-        handleError(result.popup);
-    }
-
-    // if there was an error in getting a response
-    if (result.error) {
-        handleError(result.error);
+        handlePopup(result.popup);
     }
 
     // if the response has a redirect
@@ -37,13 +33,13 @@ const sendPost = async (url, data, handler) => {
     }
 };
 
-// hides error message
-const hideError = () => {
-    document.getElementById('error').classList.add('hidden');
+// hides popup message
+const hidePopup = () => {
+    document.getElementById('popupWindow').classList.add('hidden');
 };
 
 module.exports = {
-    handleError,
+    handlePopup,
     sendPost,
-    hideError,
+    hidePopup,
 };

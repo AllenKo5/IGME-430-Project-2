@@ -31,52 +31,61 @@ const handlePremium = (e) => {
 // password change component
 const PasswordChange = (props) => {
     return (
-        <form id="passForm"
-            name="passForm"
-            onSubmit={handlePassword}
-            action="/pass"
-            method="POST"
-            className="passForm"
-        >
-            <label htmlFor="currentPass">Current Password</label>
-            <input id="currentPass" type="password" name="currentPass" placeholder="Current Password" />
-            <label htmlFor="newPass">New Password</label>
-            <input id="newPass" type="password" name="newPass" placeholder="New Password" />
-            <label htmlFor="newPass2">Confirm Password</label>
-            <input id="newPass2" type="password" name="newPass2" placeholder="Confirm New Password" />
-            <input id="_csrf1" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="submitPass" type="submit" value="Change Password" />
-        </form>
+        <div id="passWrapper">
+            <h3 id="passText">Change Password</h3>
+            <form id="passForm"
+                name="passForm"
+                onSubmit={handlePassword}
+                action="/pass"
+                method="POST"
+                className="passForm"
+            >
+                <label htmlFor="currentPass">Current Password</label>
+                <input id="currentPass" type="password" name="currentPass" placeholder="Current Password" />
+                <label htmlFor="newPass">New Password</label>
+                <input id="newPass" type="password" name="newPass" placeholder="New Password" />
+                <label htmlFor="newPass2">Confirm Password</label>
+                <input id="newPass2" type="password" name="newPass2" placeholder="Confirm New Password" />
+                <input id="_csrf1" type="hidden" name="_csrf" value={props.csrf} />
+                <input className="submitPass" type="submit" value="Change Password" />
+            </form>
+        </div>
     );
 };
 
 // premium button component
-const PremiumButton = (props) => {
+const PremiumForm = (props) => {
     if (props.premium) {
         return (
-            <form id="premiumButton"
-                name="premiumButton"
-                onSubmit={handlePremium}
-                action="/premium"
-                method="POST"
-                className="premiumButton"
-            >
-                <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
-                <input className="submitPremium" type="submit" value="Deactivate Premium" />
-            </form>
+            <div id="premiumWrapper">
+                <h3 id="premiumText">Premium</h3>
+                <form id="premiumForm"
+                    name="premiumForm"
+                    onSubmit={handlePremium}
+                    action="/premium"
+                    method="POST"
+                    className="premiumForm"
+                >
+                    <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
+                    <input className="submitPremium" type="submit" value="Deactivate Premium" />
+                </form>
+            </div>
         );
     }
     return (
-        <form id="premiumButton"
-            name="premiumButton"
-            onSubmit={handlePremium}
-            action="/premium"
-            method="POST"
-            className="premiumButton"
-        >
-            <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="submitPremium" type="submit" value="Activate Premium" />
-        </form>
+        <div id="premiumWrapper">
+            <h3 id="premiumText">Premium</h3>
+            <form id="premiumForm"
+                name="premiumForm"
+                onSubmit={handlePremium}
+                action="/premium"
+                method="POST"
+                className="premiumForm"
+            >
+                <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
+                <input className="submitPremium" type="submit" value="Activate Premium" />
+            </form>
+        </div>
     );
 };
 
@@ -96,7 +105,7 @@ const init = async () => {
     );
 
     ReactDOM.render(
-        <PremiumButton premium={accountData.account.premium} csrf={data.csrfToken} />,
+        <PremiumForm premium={accountData.account.premium} csrf={data.csrfToken} />,
         document.getElementById('premium')
     );
 };

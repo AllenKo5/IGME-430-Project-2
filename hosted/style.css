@@ -128,14 +128,7 @@ nav {
     text-decoration: none;
 }
 
-.formSubmit:link,
-.formSubmit:visited,
-.formSubmit:hover,
-.formSubmit:active {
-    color: white;
-}
-
-.formSubmit:hover {
+.formSubmit:hover .submitPass:hover {
     transition: background-color 0.4s ease;
     background-color: darkorchid;
 }
@@ -195,6 +188,11 @@ nav {
     text-decoration: none;
 }
 
+.submitMessage:hover {
+    transition: background-color 0.4s ease;
+    background-color: darkorchid;
+}
+
 #msgContent {
     text-align: center;
     margin: 2px auto;
@@ -236,4 +234,93 @@ nav {
     font-size: 0.6em;
     font-style: italic;
     float: right;
+}
+
+
+/* account.jsx css */
+#passWrapper,
+#premiumWrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#passText,
+#premiumText {
+    text-align: center;
+    font-size: 2.0em;
+}
+
+.passForm,
+.premiumForm {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 1.2em;
+}
+
+.passForm label,
+.premiumForm label {
+    display: inline-block;
+    width: 250px;
+    margin-right: 10px;
+    text-align: right;
+    font-size: 1.2em;
+}
+
+.submitPass {
+    transition: background-color 0.4s ease;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 250px;
+    height: 60px;
+    background-color: mediumorchid;
+    border-radius: 40px;
+    border-color: darkorchid;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+}
+
+.submitPass:hover {
+    transition: background-color 0.4s ease;
+    background-color: darkorchid;
+}
+
+#currentPass,
+#newPass,
+#newPass2 {
+    text-align: center;
+    margin: 2px auto;
+    font-size: 1.2em;
+    width: 300px;
+    border-radius: 6px;
+}
+
+#currentPass:focus,
+#newPass:focus,
+#newPass2:focus {
+    outline: none;
+    box-shadow: 0px 0px 1px 1px mediumorchid;
+}
+
+.submitPremium {
+    transition: background-color 0.4s ease;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 250px;
+    height: 60px;
+    background-color: goldenrod;
+    border-radius: 40px;
+    border-color: darkgoldenrod;
+    font-size: 1.2em;
+    color: white;
+    text-decoration: none;
+}
+
+.submitPremium:hover {
+    transition: background-color 0.4s ease;
+    background-color: darkgoldenrod;
 }

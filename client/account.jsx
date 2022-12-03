@@ -8,18 +8,19 @@ const handlePassword = (e) => {
     const currentPass = e.target.querySelector('#currentPass').value;
     const newPass = e.target.querySelector('#newPass').value;
     const newPass2 = e.target.querySelector('#newPass2').value;
-    const _csrf = e.target.querySelector('#_csrf').value;
+    const _csrf = e.target.querySelector('#_csrf1').value;
 
     helper.sendPost(e.target.action, { currentPass, newPass, newPass2, _csrf });
 
     return false;
 };
 
+// changes premium state
 const handlePremium = (e) => {
     e.preventDefault();
     helper.hideError();
     
-    const _csrf = e.target.querySelector('#_csrf').value;
+    const _csrf = e.target.querySelector('#_csrf2').value;
 
     helper.sendPost(e.target.action, { _csrf });
 
@@ -42,7 +43,7 @@ const PasswordChange = (props) => {
             <input id="newPass" type="password" name="newPass" placeholder="New Password" />
             <label htmlFor="newPass2">Confirm Password</label>
             <input id="newPass2" type="password" name="newPass2" placeholder="Confirm New Password" />
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            <input id="_csrf1" type="hidden" name="_csrf" value={props.csrf} />
             <input className="submitPass" type="submit" value="Change Password" />
         </form>
     );
@@ -58,7 +59,7 @@ const PremiumButton = (props) => {
             method="POST"
             className="premiumButton"
         >
-            <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
+            <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
             <input className="submitPremium" type="submit" value="Activate Premium" />
         </form>
     );

@@ -96,6 +96,11 @@ const changePassword = async (req, res) => {
     return res.status(400).json({ error: 'All fields are required!' });
   }
 
+  // if new password is identical
+  if (currentPass === newPass || currentPass === newPass2) {
+    return res.status(400).json({ error: 'New password cannot be the same as your old one!' });
+  }
+
   // if new passwords do not match
   if (newPass !== newPass2) {
     return res.status(400).json({ error: 'New passwords do not match!' });
@@ -114,6 +119,7 @@ const changePassword = async (req, res) => {
         return res.json({ message: 'Password changed!' });
       },
     );
+    return null;
   } catch (err) {
     console.log(err);
     return res.status(400).json({ error: 'An error occurred!' });
@@ -121,7 +127,24 @@ const changePassword = async (req, res) => {
 };
 
 // changes current premium status
-const changePremium = (req, res) => res.json({ message: 'Premium activated!' });
+const changePremium = (req, res) => {
+  try {
+    AccountModel.changePremium(req.session.account._id, (err, premium) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: 'An error occurred.' });
+      }
+      if (premium) {
+        return res.json({ message: 'Premium activated!' });
+      }
+      return res.json({ message: 'Premium deactivated!' });
+    });
+    return null;
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ error: 'An error occurred!' });
+  }
+}
 
 // returns CSRF token
 const getToken = (req, res) => res.json({ csrfToken: req.csrfToken() });

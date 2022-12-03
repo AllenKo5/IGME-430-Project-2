@@ -107,6 +107,21 @@ AccountSchema.statics.changePassword = async (ownerId, password, newPassword, ca
   }
 };
 
+// changes premium status
+AccountSchema.statics.changePremium = async (ownerId, callback) => {
+  try {
+    const doc = await AccountModel.findOne({ _id: ownerId }).exec();
+    if (!doc) {
+      return callback();
+    }
+
+    doc.premium
+    return callback(null, doc.premium);
+  } catch (err) {
+    return callback(err);
+  }
+}
+
 AccountModel = mongoose.model('Account', AccountSchema);
 
 module.exports = AccountModel;

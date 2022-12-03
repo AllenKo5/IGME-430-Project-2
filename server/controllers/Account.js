@@ -116,7 +116,7 @@ const changePassword = (req, res) => {
           console.log(err);
           return res.status(400).json({ error: 'Password does not match your current password!' });
         }
-        return res.json({ message: 'Password changed!' });
+        return res.json({ popup: 'Password changed!' });
       },
     );
     return null;
@@ -135,9 +135,9 @@ const changePremium = (req, res) => {
         return res.status(400).json({ error: 'An error occurred.' });
       }
       if (premium) {
-        return res.json({ message: 'Premium activated!' });
+        return res.json({ popup: 'Premium activated!' });
       }
-      return res.json({ message: 'Premium deactivated!' });
+      return res.json({ popup: 'Premium deactivated!' });
     });
     return null;
   } catch (err) {

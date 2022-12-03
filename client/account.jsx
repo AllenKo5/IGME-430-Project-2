@@ -1,4 +1,5 @@
 const helper = require('./helper.js');
+const utils = require('./utils.jsx');
 
 // submits password data
 const handlePassword = (e) => {
@@ -19,10 +20,10 @@ const handlePassword = (e) => {
 const handlePremium = (e) => {
     e.preventDefault();
     helper.hideError();
-    
+
     const _csrf = e.target.querySelector('#_csrf2').value;
 
-    helper.sendPost(e.target.action, { _csrf });
+    helper.sendPost(e.target.action, { _csrf }, updatePremiumButton);
 
     return false;
 };
@@ -79,8 +80,22 @@ const PremiumButton = (props) => {
     );
 };
 
+const updatePremiumButton = async () => {
+    const response = await fetch('/getToken');
+    const data = await response.json();
+
+    const account = await fetch('/getAccountData');
+    const accountData = await account.json();
+
+    ReactDOM.render(
+        <PremiumButton premium={accountData.account.premium} csrf={data.csrfToken} />,
+        document.getElementById('premium')
+    );
+}
+
 // init function
 const init = async () => {
+    utils.init();
     const response = await fetch('/getToken');
     const data = await response.json();
 
@@ -93,7 +108,7 @@ const init = async () => {
     );
 
     ReactDOM.render(
-        <PremiumButton premium={accountData.premium} csrf={data.csrfToken} />,
+        <PremiumButton premium={accountData.account.premium} csrf={data.csrfToken} />,
         document.getElementById('premium')
     );
 };

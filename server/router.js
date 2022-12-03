@@ -17,6 +17,7 @@ const router = (app) => {
   app.post('/msg', mid.requiresLogin, controllers.Message.makeMessage);
 
   app.post('/pass', mid.requiresLogin, controllers.Account.changePassword);
+
   app.post('/premium', mid.requiresLogin, controllers.Account.changePremium);
 
   app.get('/account', mid.requiresLogin, controllers.Account.accountPage);

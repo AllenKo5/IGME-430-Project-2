@@ -115,7 +115,8 @@ AccountSchema.statics.changePremium = async (ownerId, callback) => {
       return callback();
     }
 
-    doc.premium
+    doc.premium = !doc.premium;
+    await doc.save();
     return callback(null, doc.premium);
   } catch (err) {
     return callback(err);

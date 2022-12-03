@@ -49,8 +49,22 @@ const PasswordChange = (props) => {
     );
 };
 
-// premium option component
+// premium button component
 const PremiumButton = (props) => {
+    if (props.premium) {
+        return (
+            <form id="premiumButton"
+                name="premiumButton"
+                onSubmit={handlePremium}
+                action="/premium"
+                method="POST"
+                className="premiumButton"
+            >
+                <input id="_csrf2" type="hidden" name="_csrf" value={props.csrf} />
+                <input className="submitPremium" type="submit" value="Deactivate Premium" />
+            </form>
+        );
+    }
     return (
         <form id="premiumButton"
             name="premiumButton"
@@ -70,13 +84,16 @@ const init = async () => {
     const response = await fetch('/getToken');
     const data = await response.json();
 
+    const account = await fetch('/getAccountData');
+    const accountData = await account.json();
+
     ReactDOM.render(
         <PasswordChange csrf={data.csrfToken} />,
         document.getElementById('changePassword')
     );
 
     ReactDOM.render(
-        <PremiumButton csrf={data.csrfToken} />,
+        <PremiumButton premium={accountData.premium} csrf={data.csrfToken} />,
         document.getElementById('premium')
     );
 };

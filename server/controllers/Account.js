@@ -86,7 +86,7 @@ const getAccountData = (req, res) => AccountModel.getAccountData(
 );
 
 // changes account password
-const changePassword = async (req, res) => {
+const changePassword = (req, res) => {
   const currentPass = `${req.body.currentPass}`;
   const newPass = `${req.body.newPass}`;
   const newPass2 = `${req.body.newPass2}`;

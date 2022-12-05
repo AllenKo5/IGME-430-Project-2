@@ -71,6 +71,7 @@ nav {
 
 #popupWindow {
     position: fixed;
+    width: 50%;
     left: 50%;
     transform: translate(-50%, 0);
     bottom: 20px;
@@ -79,6 +80,18 @@ nav {
     background-color: thistle;
     border: 2px solid mediumorchid;
     text-align: center;
+}
+
+#popupButton {
+    position: absolute;
+    top: 15px;
+    right: 50px;
+    border-radius: 50px;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    background-color: mediumorchid;
+    transition: background-color 0.4s ease;
 }
 
 #ad {

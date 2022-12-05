@@ -1,8 +1,11 @@
+const helper = require('./helper.js');
+
 // popup window for errors/updates
 const PopupWindow = (props) => {
     return (
         <div id="popupWindow" className='hidden'>
             <h3><span id="popupMessage"></span></h3>
+            <button id="popupButton">X</button>
         </div>
     );
 };
@@ -48,6 +51,9 @@ const accountInit = async () => {
         <PopupWindow />,
         document.getElementById('popup')
     );
+
+    const popupButton = document.querySelector('#popupButton');
+    popupButton.addEventListener('click', helper.hidePopup);
 
     if (accountData) {
         ReactDOM.render(

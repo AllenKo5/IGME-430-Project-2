@@ -32,7 +32,7 @@ const handlePremium = (e) => {
 const PasswordChange = (props) => {
     return (
         <div id="passWrapper">
-            <h3 id="passText">Change Password</h3>
+            <h3 id="passTitle">Change Password</h3>
             <form id="passForm"
                 name="passForm"
                 onSubmit={handlePassword}
@@ -58,7 +58,8 @@ const PremiumForm = (props) => {
     if (props.premium) {
         return (
             <div id="premiumWrapper">
-                <h3 id="premiumText">Premium</h3>
+                <h3 id="premiumTitle">Premium</h3>
+                <p id="premiumText">Buy Chirp Premium to disable ads!</p>
                 <form id="premiumForm"
                     name="premiumForm"
                     onSubmit={handlePremium}
@@ -74,7 +75,8 @@ const PremiumForm = (props) => {
     }
     return (
         <div id="premiumWrapper">
-            <h3 id="premiumText">Premium</h3>
+            <h3 id="premiumTitle">Premium</h3>
+            <p id="premiumText">Buy Chirp Premium to disable ads!</p>
             <form id="premiumForm"
                 name="premiumForm"
                 onSubmit={handlePremium}

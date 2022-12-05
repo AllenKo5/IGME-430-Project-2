@@ -261,11 +261,11 @@ nav {
 #premiumWrapper {
     width: 600px;
     margin: 0 auto;
+    text-align: center;
 }
 
-#passText,
-#premiumText {
-    text-align: center;
+#passTitle,
+#premiumTitle {
     font-size: 2.0em;
 }
 

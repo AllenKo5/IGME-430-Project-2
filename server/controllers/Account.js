@@ -98,7 +98,7 @@ const changePassword = (req, res) => {
 
   // if new password is identical
   if (currentPass === newPass || currentPass === newPass2) {
-    return res.status(400).json({ popup: 'New password cannot be the same as your old one!' });
+    return res.status(400).json({ popup: 'New password cannot be same as current one!' });
   }
 
   // if new passwords do not match
@@ -114,7 +114,7 @@ const changePassword = (req, res) => {
       (err, pass) => {
         if (err || !pass) {
           console.log(err);
-          return res.status(400).json({ popup: 'Password does not match your current password!' });
+          return res.status(400).json({ popup: 'Current password does not match!' });
         }
         return res.json({ popup: 'Password changed!' });
       },

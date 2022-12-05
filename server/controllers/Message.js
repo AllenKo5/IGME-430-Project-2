@@ -23,7 +23,7 @@ const makeMessage = async (req, res) => {
   try {
     const newMessage = new Message(msgData);
     await newMessage.save();
-    return res.status(201).json({ message: newMessage.msg, author: newMessage.author, popup: 'Message posted!' });
+    return res.status(201).json({ popup: 'Message posted!' });
   } catch (err) {
     if (err.code === 11000) {
       return res.status(400).json({ popup: 'Message already exists!' });

@@ -22,16 +22,14 @@ const MessageSchema = new mongoose.Schema({
     ref: 'Account',
   },
   createdDate: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    default: new Date().toLocaleDateString(undefined, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric',
+    }),
   },
 });
 
-MessageSchema.statics.toAPI = (doc) => ({
-  author: doc.author,
-  msg: doc.msg,
-  owner: doc.owner,
-});
+MessageSchema.statics.toAPI = (doc) => ({ author: doc.author, msg: doc.msg, owner: doc.owner });
 
 MessageSchema.statics.getAllMessages = (callback) => MessageModel.find().select('author msg owner createdDate').lean().exec(callback);
 

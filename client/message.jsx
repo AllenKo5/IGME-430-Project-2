@@ -48,6 +48,7 @@ const MessageList = (props) => {
         );
     }
 
+
     // displays all messages in reverse chronological order
     const messageNodes = props.messages.map(message => {
         return (
